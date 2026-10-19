@@ -242,33 +242,30 @@ function showToast(text, ms, then) {
 
 /* ── GOOGLE ANALYTICS (après consentement uniquement) ── */
 const GA_ID = 'G-JYB6GSX1R9';
-function loadAnalytics() {
-  if (window.gtag) return;
-  const s = document.createElement('script');
-  s.async = true;
-  s.src = 'https://www.googletagmanager.com/gtag.js?id=' + GA_ID;
-  document.head.appendChild(s);
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function () { dataLayer.push(arguments); };
-  gtag('js', new Date());
-  gtag('config', GA_ID);
-}
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
 function getConsent() {
   try { return localStorage.getItem('ga_consent'); } catch { return null; }
 }
+// Consent Mode : GA est toujours chargé, mais sans cookies tant que l'utilisateur n'a pas accepté
+gtag('consent', 'default', { analytics_storage: getConsent() === 'yes' ? 'granted' : 'denied' });
+gtag('js', new Date());
+gtag('config', GA_ID);
+const gaScript = document.createElement('script');
+gaScript.async = true;
+gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+document.head.appendChild(gaScript);
+
 function setConsent(v) {
   try { localStorage.setItem('ga_consent', v); } catch {}
   document.getElementById('consent').classList.remove('show');
-  if (v === 'yes') loadAnalytics();
+  gtag('consent', 'update', { analytics_storage: v === 'yes' ? 'granted' : 'denied' });
 }
 function showConsent() { document.getElementById('consent').classList.add('show'); }
-if (getConsent() === 'yes') loadAnalytics();
-else if (getConsent() === null) showConsent();
+if (getConsent() === null) showConsent();
 
 function track(label) {
-  if (typeof window.gtag === 'function') {
-    gtag('event', 'clic_lien', { event_category: 'Bento', event_label: label });
-  }
+  gtag('event', 'clic_lien', { lien: label, transport_type: 'beacon' });
 }
 document.getElementById('link-adiil').addEventListener('click', () => track('Site ADIIL'));
 document.getElementById('link-cinema').addEventListener('click', () => track('Concours Cinema'));
