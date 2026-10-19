@@ -1,238 +1,534 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ADIIL</title>
-  <link rel="icon" type="image/png" href="pp.png">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ADIIL</title>
+  <link rel="icon" type="image/png" href="pp.png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag.js?id=G-JYB6GSX1R9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-JYB6GSX1R9');
-  </script>
+  <!-- Google tag (gtag.js) - Remplace G-XXXXXXXXXX par ton ID Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag.js?id=G-JYB6GSX1R9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JYB6GSX1R9');
+  </script>
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: "Outfit", sans-serif;
-      background: #e8e8e8;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
+    body {
+      font-family: "Outfit", sans-serif;
+      background: #e8e8e8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
 
-    .page {
-      display: flex;
-      gap: 32px;
-      max-width: 1020px;
-      width: 100%;
-      align-items: flex-start;
-    }
+    .page {
+      display: flex;
+      gap: 32px;
+      max-width: 1020px;
+      width: 100%;
+      align-items: flex-start;
+    }
 
-    /* ── PROFILE ── */
-    .profile {
-      flex: 0 0 210px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding-top: 6px;
-    }
-    .avatar {
-      width: 110px; height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #fff;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    }
-    .profile-name {
-      font-size: 1.85rem; font-weight: 800;
-      color: #111; line-height: 1.1; letter-spacing: -0.5px;
-    }
-    .profile-bio {
-      font-size: .88rem; color: #666;
-      line-height: 1.55; font-weight: 400;
-    }
-    .profile-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
-    .tag {
-      font-size: .72rem; font-weight: 600;
-      padding: 4px 10px; border-radius: 999px;
-      background: #fff; color: #555; border: 1px solid #e0e0e0;
-    }
+    /* ── PROFILE ── */
+    .profile {
+      flex: 0 0 210px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-top: 6px;
+    }
+    .avatar {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    .profile-name {
+      font-size: 1.85rem; font-weight: 800;
+      color: #111; line-height: 1.1; letter-spacing: -0.5px;
+    }
+    .profile-bio {
+      font-size: .88rem; color: #666;
+      line-height: 1.55; font-weight: 400;
+    }
+    .profile-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+    .tag {
+      font-size: .72rem; font-weight: 600;
+      padding: 4px 10px; border-radius: 999px;
+      background: #fff; color: #555; border: 1px solid #e0e0e0;
+    }
 
-    /* ── BENTO GRID ── */
-    .grid {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
+    /* ── BENTO GRID ── */
+    .grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
 
-    /* ── BASE CARD ── */
-    .card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      display: flex; flex-direction: column; gap: 7px;
-      transition: transform .2s ease, box-shadow .2s ease;
-      text-decoration: none; color: inherit; overflow: hidden;
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
-    }
+    /* ── BASE CARD ── */
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      display: flex; flex-direction: column; gap: 7px;
+      transition: transform .2s ease, box-shadow .2s ease;
+      text-decoration: none; color: inherit; overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+    }
 
-    .col-2 { grid-column: span 2; }
-    .col-3 { grid-column: span 3; }
-    .col-4 { grid-column: span 4; }
+    .col-2 { grid-column: span 2; }
+    .col-3 { grid-column: span 3; }
+    .col-4 { grid-column: span 4; }
 
-    .card-icon {
-      width: 40px; height: 40px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; flex-shrink: 0;
-    }
-    .card-title  { font-size: .92rem; font-weight: 700; color: #111; }
-    .card-sub    { font-size: .74rem; color: #aaa; font-weight: 400; }
-    .card-desc   { font-size: .78rem; color: #666; line-height: 1.45; margin-top: 2px; }
+    .card-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .card-title  { font-size: .92rem; font-weight: 700; color: #111; }
+    .card-sub    { font-size: .74rem; color: #aaa; font-weight: 400; }
+    .card-desc   { font-size: .78rem; color: #666; line-height: 1.45; margin-top: 2px; }
 
-    /* ── BUTTON ── */
-    .btn {
-      display: inline-flex; align-items: center;
-      justify-content: center; gap: 6px;
-      padding: 8px 16px; border-radius: 999px;
-      font-family: "Outfit", sans-serif;
-      font-size: .78rem; font-weight: 700;
-      border: none; cursor: pointer;
-      text-decoration: none; width: fit-content;
-      margin-top: auto;
-      transition: opacity .2s, transform .15s;
-    }
-    .btn:hover { opacity: .85; transform: scale(1.04); }
-    .btn i { position: relative; top: 0.5px; }
+    /* ── BUTTON ── */
+    .btn {
+      display: inline-flex; align-items: center;
+      justify-content: center; gap: 6px;
+      padding: 8px 16px; border-radius: 999px;
+      font-family: "Outfit", sans-serif;
+      font-size: .78rem; font-weight: 700;
+      border: none; cursor: pointer;
+      text-decoration: none; width: fit-content;
+      margin-top: auto;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn:hover { opacity: .85; transform: scale(1.04); }
+    .btn i { position: relative; top: 0.5px; }
 
-    /* ── PROJECT CARDS ── */
-    .tint-adiil  { background: #effdf7; }
-    .tint-cinema { background: #fff1f1; }
+    /* ── PROJECT CARDS ── */
+    .tint-adiil  { background: #effdf7; }
+    .tint-cinema { background: #fff1f1; }
 
-    .ic-adiil  { background: #d1fae5; color: #10b981; }
-    .ic-cinema { background: #fee2e2; color: #dc2626; }
+    .ic-adiil  { background: #d1fae5; color: #10b981; }
+    .ic-cinema { background: #fee2e2; color: #dc2626; }
 
-    .btn-adiil  { background: #6ee7b7; color: #0f2920; }
-    .btn-cinema { background: #dc2626; color: #fff; }
+    .btn-adiil  { background: #6ee7b7; color: #0f2920; }
+    .btn-cinema { background: #dc2626; color: #fff; }
 
-    /* ── FOOTER ── */
-    .footer {
-      grid-column: 1 / -1;
-      text-align: center;
-      font-size: .7rem; color: #bbb;
-      padding: 4px 0 0;
-      display: flex; align-items: center;
-      justify-content: center; gap: 10px;
-    }
-    .footer-link {
-      color: #bbb; text-decoration: none;
-      font-size: .7rem; cursor: pointer;
-      transition: color .2s;
-    }
-    .footer-link:hover { color: #888; }
+    /* ── FOOTER ── */
+    .footer {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: .7rem; color: #bbb;
+      padding: 4px 0 0;
+      display: flex; align-items: center;
+      justify-content: center; gap: 10px;
+    }
+    .footer-link {
+      color: #bbb; text-decoration: none;
+      font-size: .7rem; cursor: pointer;
+      transition: color .2s;
+    }
+    .footer-link:hover { color: #888; }
 
-    /* ── TOAST ── */
-    .toast {
-      position: fixed; bottom: 28px; left: 50%;
-      transform: translateX(-50%) translateY(60px);
-      background: #111; color: #fff;
-      font-family: "Outfit", sans-serif;
-      font-size: .82rem; font-weight: 500;
-      padding: 10px 22px; border-radius: 999px;
-      opacity: 0; transition: all .4s cubic-bezier(.22,1,.36,1);
-      pointer-events: none; z-index: 9999;
-      white-space: nowrap;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(60px);
+      background: #111; color: #fff;
+      font-family: "Outfit", sans-serif;
+      font-size: .82rem; font-weight: 500;
+      padding: 10px 22px; border-radius: 999px;
+      opacity: 0; transition: all .4s cubic-bezier(.22,1,.36,1);
+      pointer-events: none; z-index: 9999;
+      white-space: nowrap;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ── MODAL MENTIONS ── */
-    .modal-overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.35);
-      backdrop-filter: blur(4px);
-      z-index: 1000;
-      display: flex; align-items: center; justify-content: center;
-      padding: 20px;
-      opacity: 0; pointer-events: none;
-      transition: opacity .3s ease;
-    }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal {
-      background: #fff;
-      border-radius: 24px;
-      padding: 36px 32px;
-      max-width: 500px; width: 100%;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.18);
-      transform: translateY(20px) scale(0.97);
-      transition: transform .35s cubic-bezier(.22,1,.36,1);
-      max-height: 80vh; overflow-y: auto;
-    }
-    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
-    .modal-header {
-      display: flex; align-items: center;
-      justify-content: space-between; margin-bottom: 24px;
-    }
-    .modal-title {
-      font-size: 1.15rem; font-weight: 800;
-      color: #111; letter-spacing: -0.3px;
-    }
-    .modal-close {
-      width: 32px; height: 32px;
-      border-radius: 50%; border: 1px solid #e5e5e5;
-      background: #f5f5f5; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .9rem; color: #555;
-      transition: background .2s;
-    }
-    .modal-close:hover { background: #eee; }
-    .modal-section { margin-bottom: 20px; }
-    .modal-section h3 {
-      font-size: .75rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1px;
-      color: #aaa; margin-bottom: 8px;
-    }
-    .modal-section p {
-      font-size: .84rem; color: #444;
-      line-height: 1.6;
-    }
-    .modal-section ul {
-      margin: 8px 0 0 18px;
-      font-size: .84rem; color: #444;
-      line-height: 1.7;
-    }
-    .modal-section a { color: #10b981; }
-    .modal-divider {
-      height: 1px; background: #f0f0f0;
-      margin: 16px 0;
-    }
+    /* ── MODAL MENTIONS ── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: #fff;
+      border-radius: 24px;
+      padding: 36px 32px;
+      max-width: 500px; width: 100%;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+      transform: translateY(20px) scale(0.97);
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
+      max-height: 80vh; overflow-y: auto;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-header {
+      display: flex; align-items: center;
+      justify-content: space-between; margin-bottom: 24px;
+    }
+    .modal-title {
+      font-size: 1.15rem; font-weight: 800;
+      color: #111; letter-spacing: -0.3px;
+    }
+    .modal-close {
+      width: 32px; height: 32px;
+      border-radius: 50%; border: 1px solid #e5e5e5;
+      background: #f5f5f5; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; color: #555;
+      transition: background .2s;
+    }
+    .modal-close:hover { background: #eee; }
+    .modal-section { margin-bottom: 20px; }
+    .modal-section h3 {
+      font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: #aaa; margin-bottom: 8px;
+    }
+    .modal-section p {
+      font-size: .84rem; color: #444;
+      line-height: 1.6;
+    }
+    .modal-section ul {
+      margin: 8px 0 0 18px;
+      font-size: .84rem; color: #444;
+      line-height: 1.7;
+    }
+    .modal-section a { color: #10b981; }
+    .modal-divider {
+      height: 1px; background: #f0f0f0;
+      margin: 16px 0;
+    }
 
-    #hidden-link { display: none; }
+    #hidden-link { display: none; }
 
-    /* ── EASTER EGG TRAIN ── */
-    #easter-train {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      z-index: 99999;
-      pointer-events: none;
-      transform: translateX(-600px);
-    }
-    #easter-train img {
-      height: 130px;
-      display: block;
-      filter: drop-shadow(0 -4px 12px
+    /* ── EASTER EGG TRAIN ── */
+    #easter-train {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 99999;
+      pointer-events: none;
+      transform: translateX(-600px);
+    }
+    #easter-train img {
+      height: 130px;
+      display: block;
+      filter: drop-shadow(0 -4px 12px rgba(0,0,0,0.18));
+    }
+    @keyframes trainPass {
+      0%   { transform: translateX(-600px); }
+      100% { transform: translateX(calc(100vw + 600px)); }
+    }
+    #easter-train.running {
+      animation: trainPass 8s linear forwards;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    #easter-train.train-clicked img {
+      animation: trainBounce .25s ease;
+    }
+    @keyframes trainBounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-18px); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .page { flex-direction: column; align-items: center; max-width: 520px; }
+      .profile { flex: none; width: 100%; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .col-2, .col-3, .col-4 { grid-column: span 2; }
+    }
+    @media (max-width: 480px) {
+      .grid { grid-template-columns: 1fr; }
+      .col-2, .col-3, .col-4 { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- PROFILE -->
+  <div class="profile">
+    <img class="avatar" src="logo.png" alt="ADIIL">
+    <div class="profile-name">Adiil</div>
+    <div class="profile-bio">Association du Département Informatique de l'IUT de Laval. <br> Events, snacks et bonne ambiance pour tous les étudiants.</div>
+    <div class="profile-tags">
+      <span class="tag">BDE</span>
+      <span class="tag">IUT de Laval</span>
+    </div>
+  </div>
+
+  <!-- BENTO -->
+  <div class="grid">
+
+    <!-- Site de l'ADIIL -->
+    <a id="link-adiil" class="card tint-adiil col-2" href="https://www.adiil.fr/" target="_blank">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="card-icon ic-adiil"><i class="fa-solid fa-mug-hot"></i></div>
+        <div>
+          <div class="card-title">Site de l'ADIIL</div>
+          <div class="card-sub">adiil.fr</div>
+        </div>
+      </div>
+      <div class="card-desc">Retrouvez tous les événements et inscrivez-vous directement en ligne. Vous pouvez également découvrir et acheter les snacks disponibles !</div>
+      <span class="btn btn-adiil"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.6rem"></i> Voir le site</span>
+    </a>
+
+    <!-- Concours Place Cinéma -->
+    <a id="link-cinema" class="card tint-cinema col-2" href="https://secretpremieres.fr/film/comment-braquer-une-banque/" target="_blank">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="card-icon ic-cinema"><i class="fa-solid fa-ticket"></i></div>
+        <div>
+          <div class="card-title">Concours Place Cinéma</div>
+          <div class="card-sub">secretpremieres.fr</div>
+        </div>
+      </div>
+      <div class="card-desc">CONCOURS @secretpremieres : 100 places gratuites pour aller voir le film COMMENT BRAQUER UNE BANQUE dans toutes les salles de cinéma !</div>
+      <span class="btn btn-cinema"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.6rem"></i> Voir le concours</span>
+    </a>
+
+    <!-- Footer -->
+    <div class="footer">
+      © <span id="year"></span> ADIIL
+      &nbsp;·&nbsp;
+      <span class="footer-link" onclick="openMentions()">Mentions légales</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL MENTIONS LÉGALES -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeMentions(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Mentions légales</div>
+      <button class="modal-close" onclick="closeMentions(null, true)">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="modal-section">
+      <h3>1. Éditeur du site</h3>
+      <p>
+        <strong>Raison sociale :</strong> ADIIL (Association du Département Informatique de l'IUT de Laval)<br>
+        <strong>Forme juridique :</strong> Association loi 1901<br>
+        <strong>Siège social :</strong> IUT de Laval, 52 Rue des Docteurs Calmette et Guérin, 53000 Laval<br>
+        <strong>Email :</strong> <a href="mailto:association.adiil@gmail.com">association.adiil@gmail.com</a><br>
+        <strong>Directeur de la publication :</strong> Le Président de l'ADIIL
+      </p>
+    </div>
+    <div class="modal-divider"></div>
+
+    <div class="modal-section">
+      <h3>2. Hébergement</h3>
+      <p>
+        <strong>Hébergeur :</strong> GitHub, Inc. (GitHub Pages)<br>
+        <strong>Adresse :</strong> 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis<br>
+        <strong>Site web :</strong> <a href="https://pages.github.com/" target="_blank">pages.github.com</a>
+      </p>
+    </div>
+    <div class="modal-divider"></div>
+
+    <div class="modal-section">
+      <h3>3. Propriété intellectuelle</h3>
+      <p>
+        L'ensemble du contenu de ce site (textes, images, logos, graphismes, icônes, structure générale) est la propriété exclusive de l'ADIIL, sauf mention contraire.
+      </p>
+      <p style="margin-top:8px">
+        Toute reproduction, représentation, modification, distribution ou exploitation, totale ou partielle, du contenu de ce site, par quelque procédé que ce soit, sans autorisation écrite préalable de l'ADIIL, est strictement interdite et constitue une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la Propriété Intellectuelle.
+      </p>
+    </div>
+    <div class="modal-divider"></div>
+
+    <div class="modal-section">
+      <h3>4. Limitation de responsabilité</h3>
+      <p>
+        L'ADIIL s'efforce de maintenir le site accessible et de fournir des informations exactes et à jour. Cependant, l'ADIIL ne peut être tenue responsable :
+      </p>
+      <ul>
+        <li>Des interruptions temporaires ou permanentes du site, quelles qu'en soient les causes</li>
+        <li>Des erreurs ou omissions présentes sur le site</li>
+        <li>Des dommages directs ou indirects résultant de l'utilisation du site</li>
+        <li>Du contenu des sites externes vers lesquels des liens hypertextes renvoient</li>
+      </ul>
+    </div>
+    <div class="modal-divider"></div>
+
+    <div class="modal-section">
+      <h3>5. Liens hypertextes</h3>
+      <p>
+        Le site peut contenir des liens vers des sites tiers. L'ADIIL n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu.
+      </p>
+      <p style="margin-top:8px">
+        La création de liens hypertextes vers le site adiil.fr est soumise à l'autorisation préalable de l'ADIIL.
+      </p>
+    </div>
+    <div class="modal-divider"></div>
+
+    <div class="modal-section">
+      <h3>6. Droit applicable et juridiction</h3>
+      <p>
+        Les présentes mentions légales sont régies par le droit français. En cas de litige relatif à l'interprétation ou l'exécution des présentes, les tribunaux français seront seuls compétents.
+      </p>
+    </div>
+    <div class="modal-divider"></div>
+
+    <div class="modal-section">
+      <h3>Documents juridiques associés</h3>
+      <p>Pour plus d'informations sur vos droits et nos conditions, consultez les documents suivants :</p>
+      <ul>
+        <li><a href="https://www.adiil.fr/cgu" target="_blank">Conditions Générales d'Utilisation</a></li>
+        <li><a href="https://www.adiil.fr/cgu" target="_blank">Règles d'utilisation du site et des services</a></li>
+        <li><a href="https://www.adiil.fr/cgv" target="_blank">Conditions Générales de Vente</a></li>
+        <li><a href="https://www.adiil.fr/cgv" target="_blank">Conditions des achats et transactions</a></li>
+        <li><a href="https://www.adiil.fr/confidentialite" target="_blank">Politique de Confidentialité</a></li>
+        <li><a href="https://www.adiil.fr/confidentialite" target="_blank">Protection de vos données personnelles (RGPD)</a></li>
+      </ul>
+    </div>
+    <div class="modal-divider"></div>
+
+    <div class="modal-section">
+      <h3>Contact</h3>
+      <p>
+        Pour toute question concernant ces mentions légales :
+        <a href="mailto:association.adiil@gmail.com">association.adiil@gmail.com</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<a id="hidden-link" href="Logbook.html">hidden</a>
+
+<div id="easter-train">
+  <img src="train.png" alt="">
+</div>
+
+<div class="toast" id="toast">🔓 Page secrète déverrouillée…</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── TRACKING DES CLICS (Google Analytics) ── */
+  document.getElementById('link-adiil').addEventListener('click', function() {
+    if (typeof gtag === 'function') {
+      gtag('event', 'clic_lien', {
+        'event_category': 'Bento',
+        'event_label': 'Site ADIIL'
+      });
+    }
+  });
+
+  document.getElementById('link-cinema').addEventListener('click', function() {
+    if (typeof gtag === 'function') {
+      gtag('event', 'clic_lien', {
+        'event_category': 'Bento',
+        'event_label': 'Concours Cinema'
+      });
+    }
+  });
+
+  /* ── MODAL MENTIONS ── */
+  function openMentions() {
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMentions(e, force) {
+    if (force || (e && e.target === document.getElementById('modal-overlay'))) {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMentions(null, true);
+  });
+
+  /* ── EASTER EGG ── */
+  const hiddenLink = document.getElementById('hidden-link');
+
+  function triggerSecret() {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => {
+      t.classList.remove('show');
+      setTimeout(() => hiddenLink.click(), 400);
+    }, 1100);
+  }
+
+  // Ctrl+E → redirection immédiate
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'e') {
+      e.preventDefault();
+      triggerSecret();
+    }
+  });
+
+  /* ── QUEST SYSTEM (toast uniquement) ── */
+  const QUESTS = {
+    train_click: { emoji: '🚂', name: 'Attraper le train' }
+  };
+  function isQuestDone(id) {
+    try { return localStorage.getItem('quest_' + id) === '1'; } catch { return false; }
+  }
+  function completeQuest(id) {
+    if (isQuestDone(id)) return;
+    try { localStorage.setItem('quest_' + id, '1'); } catch {}
+    const q = QUESTS[id];
+    if (!q) return;
+    const t = document.getElementById('toast');
+    t.textContent = q.emoji + ' Quête accomplie : ' + q.name + ' !';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  /* ── EASTER EGG TRAIN ── */
+  function launchTrain() {
+    const train = document.getElementById('easter-train');
+    if (train.classList.contains('running')) return;
+    train.classList.add('running');
+    train.addEventListener('animationend', () => {
+      train.classList.remove('running');
+      scheduleTrain();
+    }, { once: true });
+  }
+  function scheduleTrain() {
+    const delay = 45000 + Math.random() * 60000;
+    setTimeout(launchTrain, delay);
+  }
+  scheduleTrain();
+
+  // Clic sur le train en mouvement
+  document.getElementById('easter-train').addEventListener('click', () => {
+    const train = document.getElementById('easter-train');
+    if (!train.classList.contains('running')) return;
+    train.classList.add('train-clicked');
+    train.addEventListener('animationend', () => train.classList.remove('train-clicked'), { once: true });
+    completeQuest('train_click');
+  });
+</script>
+
+</body>
+</html>
