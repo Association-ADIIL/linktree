@@ -294,7 +294,7 @@
         <div class="card-icon ic-cinema"><i class="fa-solid fa-ticket"></i></div>
         <div>
           <div class="card-title">Concours Place Cinéma</div>
-          <div class="card-sub">secretpremieres.fr <span id="counter-cinema" style="font-weight:700; color:#dc2626;">(chargement...)</span></div>
+          <div class="card-sub">secretpremieres.fr <span id="counter-cinema" style="font-weight:700; color:#dc2626;">(0 clics)</span></div>
         </div>
       </div>
       <div class="card-desc">CONCOURS @secretpremieres : 100 places gratuites pour aller voir le film COMMENT BRAQUER UNE BANQUE dans toutes les salles de cinéma !</div>
@@ -422,35 +422,30 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ── COMPTEUR DE CLICS (Abacus API) ── */
-  const counterUrl = "https://abacus.jasoncameron.dev/hit/adiil.github.io/cinema";
+  /* ── COMPTEUR DE CLICS PROPRE (CounterAPI sans incrémentation auto au GET) ── */
+  const namespace = "adiil-bento";
+  const counterName = "cinema";
 
-  // 1. Charger la valeur actuelle au démarrage (sans l'incrémenter, ou via un GET si supporté)
-  // Sur Abacus, un appel GET simple incrémente directement, c'est idéal pour un compteur de clics au clic !
-  // Pour l'affichage initial, on peut juste récupérer la valeur avec un appel ou laisser un état de base :
-  fetch(counterUrl)
+  // 1. Charger uniquement la valeur au démarrage (GET sans /up)
+  fetch(`https://counterapi.dev/api/v1/counters/${namespace}/${counterName}`)
     .then(response => response.json())
     .then(data => {
       if (data && data.value !== undefined) {
         document.getElementById('counter-cinema').textContent = `(${data.value} clics)`;
       }
     })
-    .catch(err => {
-      console.log('Erreur chargement compteur', err);
-      document.getElementById('counter-cinema').textContent = `(0 clics)`;
-    });
+    .catch(err => console.log('Erreur chargement compteur'));
 
-  // 2. Incrémenter et enregistrer le clic au moment où l'utilisateur clique
+  // 2. Incrémenter de +1 uniquement lorsqu'on clique sur le lien
   document.getElementById('link-cinema').addEventListener('click', function(e) {
-    // L'appel fetch se fait en arrière-plan pendant que l'utilisateur est redirigé vers le concours
-    fetch(counterUrl)
+    fetch(`https://counterapi.dev/api/v1/counters/${namespace}/${counterName}/up`)
       .then(response => response.json())
       .then(data => {
         if (data && data.value !== undefined) {
-          console.log("Nouveau total de clics : " + data.value);
+          document.getElementById('counter-cinema').textContent = `(${data.value} clics)`;
         }
       })
-      .catch(err => console.log('Erreur incrémentation', err));
+      .catch(err => console.log('Erreur incrémentation'));
   });
 
   /* ── MODAL MENTIONS ── */
@@ -493,7 +488,7 @@
     train_click: { emoji: '🚂', name: 'Attraper le train' }
   };
   function isQuestDone(id) {
-    try { return localStorage.setItem('quest_' + id) === '1'; } catch { return false; }
+    try { return localStorage.getItem('quest_' + id) === '1'; } catch { return false; }
   }
   function completeQuest(id) {
     if (isQuestDone(id)) return;
