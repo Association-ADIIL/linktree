@@ -7,6 +7,16 @@
   <link rel="icon" type="image/png" href="pp.png">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Google tag (gtag.js) - Remplace G-XXXXXXXXXX par ton ID Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag.js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -276,7 +286,7 @@
   <div class="grid">
 
     <!-- Site de l'ADIIL -->
-    <a class="card tint-adiil col-2" href="https://www.adiil.fr/" target="_blank">
+    <a id="link-adiil" class="card tint-adiil col-2" href="https://www.adiil.fr/" target="_blank">
       <div style="display:flex;align-items:center;gap:10px;">
         <div class="card-icon ic-adiil"><i class="fa-solid fa-mug-hot"></i></div>
         <div>
@@ -289,7 +299,7 @@
     </a>
 
     <!-- Concours Place Cinéma -->
-    <a class="card tint-cinema col-2" href="https://secretpremieres.fr/film/comment-braquer-une-banque/" target="_blank">
+    <a id="link-cinema" class="card tint-cinema col-2" href="https://secretpremieres.fr/film/comment-braquer-une-banque/" target="_blank">
       <div style="display:flex;align-items:center;gap:10px;">
         <div class="card-icon ic-cinema"><i class="fa-solid fa-ticket"></i></div>
         <div>
@@ -421,6 +431,25 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── TRACKING DES CLICS (Google Analytics) ── */
+  document.getElementById('link-adiil').addEventListener('click', function() {
+    if (typeof gtag === 'function') {
+      gtag('event', 'clic_lien', {
+        'event_category': 'Bento',
+        'event_label': 'Site ADIIL'
+      });
+    }
+  });
+
+  document.getElementById('link-cinema').addEventListener('click', function() {
+    if (typeof gtag === 'function') {
+      gtag('event', 'clic_lien', {
+        'event_category': 'Bento',
+        'event_label': 'Concours Cinema'
+      });
+    }
+  });
 
   /* ── MODAL MENTIONS ── */
   function openMentions() {
