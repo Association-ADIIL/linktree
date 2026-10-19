@@ -422,22 +422,26 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ── COMPTEUR DE CLICS (API) ── */
-  fetch('https://api.countapi.xyz/get/adiil-bento/cinema')
+  /* ── COMPTEUR DE CLICS (CounterAPI) ── */
+  const namespace = "adiil-bento-cinema";
+
+  // 1. Récupérer le nombre de clics au chargement
+  fetch(`https://api.counterapi.dev/v1/${namespace}/clicks/`)
     .then(response => response.json())
     .then(data => {
-      if (data && data.value !== undefined) {
-        document.getElementById('counter-cinema').textContent = `(${data.value} clics)`;
+      if (data && data.count !== undefined) {
+        document.getElementById('counter-cinema').textContent = `(${data.count} clics)`;
       }
     })
     .catch(err => console.log('Erreur compteur'));
 
+  // 2. Incrémenter de +1 au clic sur le lien
   document.getElementById('link-cinema').addEventListener('click', function(e) {
-    fetch('https://api.countapi.xyz/hit/adiil-bento/cinema')
+    fetch(`https://api.counterapi.dev/v1/${namespace}/clicks/up`)
       .then(response => response.json())
       .then(data => {
-        if (data && data.value !== undefined) {
-          document.getElementById('counter-cinema').textContent = `(${data.value} clics)`;
+        if (data && data.count !== undefined) {
+          document.getElementById('counter-cinema').textContent = `(${data.count} clics)`;
         }
       });
   });
@@ -506,11 +510,4 @@
     }, { once: true });
   }
   function scheduleTrain() {
-    const delay = 45000 + Math.random() * 60000;
-    setTimeout(launchTrain, delay);
-  }
-  scheduleTrain();
-
-  // Clic sur le train en mouvement
-  document.getElementById('easter-train').addEventListener('click', () => {
-    const train = document.getElementById
+    const delay = 45000 + Math.random() *
