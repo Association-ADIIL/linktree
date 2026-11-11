@@ -34,9 +34,10 @@ body{font-family:"Outfit",system-ui,sans-serif;background:#e8e8e8;min-height:100
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 16px;border-radius:999px;font-family:inherit;font-size:.78rem;font-weight:700;border:none;cursor:pointer;text-decoration:none;width:fit-content;margin-top:auto;transition:opacity .2s,transform .15s}
 .btn:hover{opacity:.85;transform:scale(1.04)}
 .btn i{position:relative;top:.5px;font-size:.6rem}
-.tint-adiil{background:#effdf7}.tint-cinema{background:#fff1f1}
-.ic-adiil{background:#d1fae5;color:#10b981}.ic-cinema{background:#fee2e2;color:#dc2626}
-.btn-adiil{background:#6ee7b7;color:#0f2920}.btn-cinema{background:#dc2626;color:#fff}
+.tint-adiil{background:#effdf7}
+.ic-adiil{background:#d1fae5;color:#10b981}
+.btn-adiil{background:#6ee7b7;color:#0f2920}
+.tint-event{background:#fffbeb}.ic-event{background:#fef3c7;color:#d97706}.btn-event{background:#f59e0b;color:#2b1a00}
 .footer{grid-column:1/-1;text-align:center;font-size:.7rem;color:#999;padding:4px 0 0;display:flex;align-items:center;justify-content:center;gap:10px}
 .footer-link{color:#999;background:none;border:none;font:inherit;cursor:pointer;transition:color .2s}
 .footer-link:hover{color:#666}
@@ -101,6 +102,18 @@ body{font-family:"Outfit",system-ui,sans-serif;background:#e8e8e8;min-height:100
   </div>
 
   <div class="grid">
+    <a id="link-event" class="card tint-event col-2" href="https://www.adiil.fr/events/14" target="_blank" rel="noopener noreferrer">
+      <div class="card-head">
+        <div class="card-icon ic-event"><i class="fa-solid fa-gamepad"></i></div>
+        <div>
+          <div class="card-title">Bingo Minecraft</div>
+          <div class="card-sub">Mardi 24 novembre, 21h</div>
+        </div>
+      </div>
+      <div class="card-desc">Tournoi en duo sur Minecraft 26.2 (cracks autorisés), 2 games d'environ 1h. 8 équipes maximum, avec au moins un membre du BUT INFO par binôme. À gagner : 10 € de solde ADIIL, 5 € ou 2 canettes.</div>
+      <span class="btn btn-event"><i class="fa-solid fa-arrow-up-right-from-square"></i> S'inscrire</span>
+    </a>
+
     <a id="link-adiil" class="card tint-adiil col-2" href="https://www.adiil.fr/" target="_blank" rel="noopener noreferrer">
       <div class="card-head">
         <div class="card-icon ic-adiil"><i class="fa-solid fa-mug-hot"></i></div>
@@ -111,18 +124,6 @@ body{font-family:"Outfit",system-ui,sans-serif;background:#e8e8e8;min-height:100
       </div>
       <div class="card-desc">Retrouvez tous les événements et inscrivez-vous directement en ligne. Vous pouvez également découvrir et acheter les snacks disponibles !</div>
       <span class="btn btn-adiil"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir le site</span>
-    </a>
-
-    <a id="link-cinema" class="card tint-cinema col-2" href="https://secretpremieres.fr/film/comment-braquer-une-banque/" target="_blank" rel="noopener noreferrer">
-      <div class="card-head">
-        <div class="card-icon ic-cinema"><i class="fa-solid fa-ticket"></i></div>
-        <div>
-          <div class="card-title">Concours Place Cinéma</div>
-          <div class="card-sub">secretpremieres.fr</div>
-        </div>
-      </div>
-      <div class="card-desc">CONCOURS @secretpremieres : 100 places gratuites pour aller voir le film COMMENT BRAQUER UNE BANQUE dans toutes les salles de cinéma !</div>
-      <span class="btn btn-cinema"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir le concours</span>
     </a>
 
     <div class="footer">
@@ -267,8 +268,8 @@ if (getConsent() === null) showConsent();
 function track(label) {
   gtag('event', 'clic_lien', { lien: label, transport_type: 'beacon' });
 }
+document.getElementById('link-event').addEventListener('click', () => track('Evenement Bingo Minecraft'));
 document.getElementById('link-adiil').addEventListener('click', () => track('Site ADIIL'));
-document.getElementById('link-cinema').addEventListener('click', () => track('Concours Cinema'));
 
 /* ── MODAL MENTIONS ── */
 function openMentions() {
