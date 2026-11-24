@@ -102,16 +102,16 @@ body{font-family:"Outfit",system-ui,sans-serif;background:#e8e8e8;min-height:100
   </div>
 
   <div class="grid">
-    <a id="link-event" class="card tint-event col-2" href="https://www.adiil.fr/events/14" target="_blank" rel="noopener noreferrer">
+    <a id="link-event" class="card tint-event col-2" href="https://forms.gle/uZqctdBsmvqqBqmD7" target="_blank" rel="noopener noreferrer">
       <div class="card-head">
-        <div class="card-icon ic-event"><i class="fa-solid fa-gamepad"></i></div>
+        <div class="card-icon ic-event"><i class="fa-solid fa-clipboard-list"></i></div>
         <div>
-          <div class="card-title">Bingo Minecraft</div>
-          <div class="card-sub">Mardi 24 novembre, 21h</div>
+          <div class="card-title">Enquête de satisfaction</div>
+          <div class="card-sub">Bingo Minecraft</div>
         </div>
       </div>
-      <div class="card-desc">Tournoi en duo sur Minecraft 26.2 (cracks autorisés), 2 games d'environ 1h. 8 équipes maximum, avec au moins un membre du BUT INFO par binôme. À gagner : 10 € de solde ADIIL, 5 € ou 2 canettes.</div>
-      <span class="btn btn-event"><i class="fa-solid fa-arrow-up-right-from-square"></i> S'inscrire</span>
+      <div class="card-desc">Le Bingo Minecraft vient de se dérouler ! Vous avez participé ou suivi l'événement ? Donnez-nous votre avis en quelques minutes pour nous aider à améliorer les prochains événements.</div>
+      <span class="btn btn-event"><i class="fa-solid fa-arrow-up-right-from-square"></i> Répondre à l'enquête</span>
     </a>
 
     <a id="link-adiil" class="card tint-adiil col-2" href="https://www.adiil.fr/" target="_blank" rel="noopener noreferrer">
@@ -268,7 +268,7 @@ if (getConsent() === null) showConsent();
 function track(label) {
   gtag('event', 'clic_lien', { lien: label, transport_type: 'beacon' });
 }
-document.getElementById('link-event').addEventListener('click', () => track('Evenement Bingo Minecraft'));
+document.getElementById('link-event').addEventListener('click', () => track('Enquete satisfaction Bingo Minecraft'));
 document.getElementById('link-adiil').addEventListener('click', () => track('Site ADIIL'));
 
 /* ── MODAL MENTIONS ── */
